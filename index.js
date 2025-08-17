@@ -1,3 +1,5 @@
+let before = []
+let photosNumber = 100;
 $("#btn").mouseup(click);
 
 
@@ -9,8 +11,23 @@ function click () {
             $("#photo").css("background-color", `rgb(${color}, ${color}, ${color})`);
         }, 70 * i);
     }
-    var random = Math.floor(Math.random() * 100 + 1);
-    console.log(random);
+
+    var random;
+
+    do {
+        random = Math.floor(Math.random() * photosNumber + 1);
+        console.log(random);
+    } while (before.indexOf(random) != -1);
+
+    if (before.length <= 19) {
+        before.push(random);
+        console.log(before);
+    } else {
+        before.shift();
+        before.push(random);
+        console.log(before);
+    }
+    
     $("#photo").css("background-image", `url(photos/${random}.jpg)`);
     setTimeout(function() {
         $("#info").css("background-color", "rgba(0,0,0,0)");
